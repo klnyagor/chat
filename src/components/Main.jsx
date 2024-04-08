@@ -1,5 +1,5 @@
 import Logo from '../assets/logo.png';
-import userIcon from '../assets/user-icon.jpg';
+import aluno from '../assets/aluno.png';
 import Input from './Input';
 
 export const Main = ({
@@ -18,18 +18,18 @@ export const Main = ({
           <div key={i} className={message.isBot ? 'chat bot' : 'chat'}>
             <img
               className="chatImg"
-              src={message.isBot ? Logo : userIcon}
+              src={message.isBot ? Logo : aluno}
               style={
                 message.isBot
                   ? {
-                      width: '3.5rem',
-                      height: '3.5rem',
+                      width: '5.5rem',
+                      height: '5.5rem',
                       objectFit: 'contain',
                       backgroundColor: 'white',
                     }
                   : {}
               }
-              alt={message.isBot ? 'botIcon' : 'userIcon'}
+              alt={message.isBot ? 'botIcon' : 'aluno'}
             />
             <p className="txt">{message.text}</p>
           </div>

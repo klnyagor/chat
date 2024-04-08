@@ -1,4 +1,4 @@
-import Logo from '../assets/logo.png';
+import Ifpb from '../assets/ifpb.png';
 import AddBtn from '../assets/add-30.png';
 import MsgIcon from '../assets/message.svg';
 
@@ -8,18 +8,18 @@ const Sidebar = ({ handleQuery }) => {
       <div className="upperSide">
         <div className="upperSideTop">
           <img
-            src={Logo}
+            src={Ifpb}
             alt="logo"
             className="logo"
             style={{
-              width: '48px',
-              height: '48px',
-              borderRadius: '50%',
+              width: '60px',
+              height: '60px',
+              borderRadius: '10%',
               objectFit: 'contain',
               backgroundColor: 'white',
             }}
           />
-          <span className="brand">Chat-App</span>
+          <span className="brand">IF-GDL</span>
         </div>
         <button
           className="midBtn"

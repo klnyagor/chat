@@ -1,15 +1,20 @@
 import './App.css';
 import { useEffect, useRef, useState } from 'react';
+
 import Sidebar from './components/Sidebar';
 import { Main } from './components/Main';
+import httpHelper from './helpers/HttpHelper'
 
 function App() {
+  
   const msgEnd = useRef(null);
+
+  const api = httpHelper();
 
   const [input, setInput] = useState('');
   const [messages, setMessages] = useState([
     {
-      text: 'Hi',
+      text: 'Olá',
       isBot: true,
     },
   ]);
@@ -18,30 +23,21 @@ function App() {
     msgEnd.current.scrollIntoView();
   }, [messages]);
 
-  // gambiarra/função para enviar a msg para o modelo
-  const gambiarra =
-    'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Perferendis illo debitis perspiciatis, impedit, minus placeat maiores quo, consequatur atque omnis quam ratione assumenda aspernatur distinctio nulla porro maxime libero tempora!';
-  const sendMsg = (msg) => {
-    // ...= async (msg)...
-    const res = `Mensagem recebida: ${msg} ${gambiarra}`; //...= await <função que envia msg e retorna resposta do modelo>...
-    return res;
-  };
-
   const handleSend = async () => {
-    const text = input;
+    const texto = input;
     setInput('');
-    setMessages([...messages, { text, isBot: false }]);
-
-    // console.log(input);
-    // const res = await <Função que envia a pergunta e retorna uma resposta>(input);
-    const res = await sendMsg(text);
-    // res = <resposta>
-    // console.log(res);
-    setMessages([
-      ...messages,
-      { text: text, isBot: false },
-      { text: res, isBot: true },
-    ]);
+    setMessages([...messages, { text: texto, isBot: false }]);
+    api
+      .post('/chats/1/mensagens', { body: {texto: texto} })
+      .then(resposta => {
+        console.log(resposta);
+        setMessages([
+          ...messages,
+          { text: texto, isBot: false },
+          { text: resposta.texto, isBot: true },
+        ]);
+      })
+      .catch(err => console.log(err))    
   };
 
   const handleEnter = async (e) => {
